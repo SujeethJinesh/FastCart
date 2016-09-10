@@ -6,12 +6,24 @@ package com.example.admin.fastcart;
 public class ItemObject {
 
     private String name;
-    private String calories;
+    private String url;
+    private String price;
 
-    public ItemObject(String name, String calories) {
+    public ItemObject(String name, String url, String price) {
         this.name = name;
-        this.calories = calories;
-
+        this.url = url;
+        this.price = price;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public String getPrice() {
+        return price;
+    }
 }
