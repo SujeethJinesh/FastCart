@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "157025914400",
+    "project_id": "firebase-fastcart"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:157025914400:android:aea0ffa6ca369e72",
+        "android_client_info": {
+          "package_name": "com.example.admin.fastcart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "157025914400-mpicuuhf74c46msi1cpqcrsr7mjpk8fo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.admin.fastcart",
+            "certificate_hash": "7FE4CE04DF946E4AC757A4EFBADE4433E981CB2E"
+          }
+        },
+        {
+          "client_id": "157025914400-dn4h2214g2ujaap838dstjflo552ifgj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPRrkB3QN36QC_8HXjXM5MIxRAjaIh9NM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
