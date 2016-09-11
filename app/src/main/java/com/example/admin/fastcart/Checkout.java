@@ -72,9 +72,9 @@ public class Checkout extends FragmentActivity {
             mWalletFragment.initialize(startParamsBuilder.build());
 
             // Add the fragment to the UI
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.wallet_button_holder, mWalletFragment, WALLET_FRAGMENT_ID)
-                    .commit();
+//            getSupportFragmentManager().beginTransaction()
+//                    .replace(R.id.wallet_button_holder, mWalletFragment, WALLET_FRAGMENT_ID)
+//                    .commit();
         }
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.

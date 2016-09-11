@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="fill_parent" android:layout_height="fill_parent">
 
-    <TextView
-        android:layout_margin="16dp"
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:text="gallery"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+    <!--<TextView-->
+        <!--android:layout_margin="16dp"-->
+        <!--android:id="@+id/textView"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:text="gallery"-->
+        <!--android:textAppearance="?android:attr/textAppearanceLarge" />-->
+
+    <Gallery
+        android:id="@+id/Gallery01"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"/>
+
+    <ImageSwitcher
+        android:id="@+id/ImageSwitcher01"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"/>
+
+
 </RelativeLayout>

@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:paddingTop="32dp">
 
-    <TextView
-        android:layout_margin="16dp"
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:text="outfit selector"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+    <!--<TextView-->
+        <!--android:layout_margin="16dp"-->
+        <!--android:id="@+id/textView"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:text="outfit selector"-->
+        <!--android:textAppearance="?android:attr/textAppearanceLarge" />-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,23 +23,55 @@
             android:layout_width="fill_parent"
             android:layout_height="200dp"
             android:layout_weight="1"
-            android:id="@+id/viewFlipper1"
-            android:layout_below="@+id/textView"
-            android:layout_alignParentStart="true" />
+            android:id="@+id/view_flipper_top"
+            android:layout_alignParentStart="true">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/shirt"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/greyshirt"/>
+
+        </ViewFlipper>
+
         <ViewFlipper
             android:layout_width="fill_parent"
             android:layout_height="200dp"
             android:layout_weight="1"
-            android:id="@+id/viewFlipper2"
-            android:layout_below="@+id/textView"
-            android:layout_alignParentStart="true" />
-        <ViewFlipper
-            android:layout_width="fill_parent"
-            android:layout_height="200dp"
-            android:layout_weight="1"
-            android:id="@+id/viewFlipper3"
-            android:layout_below="@+id/textView"
-            android:layout_alignParentStart="true" />
+            android:id="@+id/view_flipper_middle"
+            android:layout_below="@id/view_flipper_top"
+            android:layout_alignParentStart="true" >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/khakishorts"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/pants"/>
+
+        </ViewFlipper>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/gallery_button"
+                android:text="View Gallery"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="Purchase"/>
+        </RelativeLayout>
 
     </LinearLayout>
 
