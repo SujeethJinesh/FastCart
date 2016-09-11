@@ -3,6 +3,7 @@ package com.example.admin.fastcart;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
@@ -28,7 +29,7 @@ import com.google.zxing.integration.android.IntentResult;
  */
 public class LoginPage extends FragmentActivity implements GoogleApiClient.OnConnectionFailedListener {
 
-    private Button button;
+//    private Button button;
     private GoogleApiClient mGoogleApiClient;
     private static final String TAG = "SignInOnMainActivity";
     private static final int RC_SIGN_IN = 9001;
@@ -41,7 +42,7 @@ public class LoginPage extends FragmentActivity implements GoogleApiClient.OnCon
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        button = (Button) findViewById(R.id.button);
+//        button = (Button) findViewById(R.id.button);
         mStatusTextView = (TextView) findViewById(R.id.status);
 
         // Configure sign-in to request the user's ID, email address, and basic
@@ -72,18 +73,18 @@ public class LoginPage extends FragmentActivity implements GoogleApiClient.OnCon
             }
         });
         
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                IntentIntegrator integrator = new IntentIntegrator(activity);
-                integrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
-                integrator.setPrompt("Scan");
-                integrator.setCameraId(0);
-                integrator.setBeepEnabled(false);
-                integrator.setBarcodeImageEnabled(false);
-                integrator.initiateScan();
-            }
-        });
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                IntentIntegrator integrator = new IntentIntegrator(activity);
+//                integrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
+//                integrator.setPrompt("Scan");
+//                integrator.setCameraId(0);
+//                integrator.setBeepEnabled(false);
+//                integrator.setBarcodeImageEnabled(false);
+//                integrator.initiateScan();
+//            }
+//        });
     }
 
     private void signIn() {
@@ -106,7 +107,10 @@ public class LoginPage extends FragmentActivity implements GoogleApiClient.OnCon
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_SHORT).show();
             } else {
                 Log.d("LoginPage", "Scanned");
-                Toast.makeText(this, result.getContents(), Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, SelectionScreen.class).putExtra("imageUri", result.toString()));
+//                        setData(Uri.parse(result.toString()));
+//                Toast.makeText(this, result.getContents(), Toast.LENGTH_SHORT).show();
+                // buttons
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
