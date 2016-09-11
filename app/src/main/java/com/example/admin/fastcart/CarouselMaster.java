@@ -15,7 +15,8 @@ import android.widget.Button;
  * Created by aayush on 9/10/16.
  */
 public class CarouselMaster extends FragmentActivity {
-    ViewPager viewPager = null;
+    static ViewPager viewPager = null;
+    MyAdapter myAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +25,16 @@ public class CarouselMaster extends FragmentActivity {
 
         viewPager = (ViewPager) findViewById(R.id.pager);
         FragmentManager fragmentManager = getSupportFragmentManager();
-        viewPager.setAdapter(new MyAdapter(fragmentManager));
+        myAdapter = new MyAdapter(fragmentManager);
+        viewPager.setAdapter(myAdapter);
+    }
+
+    public static void moveToGallery() {
+        viewPager.setCurrentItem(0);
+    }
+
+    public static void moveToPurchase() {
+        viewPager.setCurrentItem(2);
     }
 
     class MyAdapter extends FragmentPagerAdapter {

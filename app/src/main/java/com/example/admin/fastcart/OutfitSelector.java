@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ViewFlipper;
 
 /**
@@ -18,9 +19,22 @@ public class OutfitSelector extends Fragment {
     ViewFlipper viewFlipperMiddle;
     ViewFlipper viewFlipperBottom;
 
+    Button galleryButton;
+    Button purchaseButton;
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.outfit_selector, container, false);
+
+        galleryButton = (Button) rootView.findViewById(R.id.gallery_button);
+        purchaseButton = (Button) rootView.findViewById(R.id.purchase_button);
+
+        galleryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         viewFlipperTop = (ViewFlipper) rootView.findViewById(R.id.view_flipper_top);
         viewFlipperTop.setOnClickListener(new View.OnClickListener() {
@@ -53,22 +67,19 @@ public class OutfitSelector extends Fragment {
             }
         });
 
-        viewFlipperBottom = (ViewFlipper) rootView.findViewById(R.id.view_flipper_bottom);
-        viewFlipperBottom.setOnClickListener(new View.OnClickListener() {
-            boolean bool = true;
+        galleryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (bool) {
-                    viewFlipperBottom.startFlipping();
-                    viewFlipperMiddle.setFlipInterval(3000);
-                    bool = !bool;
-                } else {
-                    viewFlipperBottom.stopFlipping();
-                }
+                CarouselMaster.moveToGallery();
             }
         });
 
-
+        purchaseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CarouselMaster.moveToPurchase();
+            }
+        });
 
         return rootView;
     }
