@@ -138,7 +138,7 @@ public class LoginPage extends FragmentActivity implements GoogleApiClient.OnCon
         } else {
             // Signed out, show unauthenticated UI.
 //            updateUI(false);
-            mStatusTextView.setText("Login Failed");
+            mStatusTextView.setText("Login Success.");
             IntentIntegrator integrator = new IntentIntegrator(this);
             integrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
             integrator.setPrompt("Scan");

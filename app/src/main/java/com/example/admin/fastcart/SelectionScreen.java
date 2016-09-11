@@ -42,6 +42,7 @@ public class SelectionScreen extends AppCompatActivity {
 //        ImageView mChart = (ImageView) findViewById(R.id.targe);
         String URL = getIntent().getExtras().getString("imageUri");
         Log.d("SelectionScreen",URL);
+//        targetImageView.setImageResource(R.drawable.greyshirt);
 
 //        new DownloadImageTask.execute(URL);
 
