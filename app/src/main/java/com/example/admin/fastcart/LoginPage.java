@@ -26,7 +26,7 @@ import com.google.zxing.integration.android.IntentResult;
 /**
  * Created by admin on 9/10/16.
  */
-public class MainActivity extends FragmentActivity implements GoogleApiClient.OnConnectionFailedListener {
+public class LoginPage extends FragmentActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     private Button button;
     private GoogleApiClient mGoogleApiClient;
@@ -102,10 +102,10 @@ public class MainActivity extends FragmentActivity implements GoogleApiClient.On
             handleSignInResult(resultG);
         } else if (result != null) {
             if (result.getContents() == null) {
-                Log.d("MainActivity", "Cancelled Scan");
+                Log.d("LoginPage", "Cancelled Scan");
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_SHORT).show();
             } else {
-                Log.d("MainActivity", "Scanned");
+                Log.d("LoginPage", "Scanned");
                 Toast.makeText(this, result.getContents(), Toast.LENGTH_SHORT).show();
             }
         } else {
@@ -144,3 +144,5 @@ public class MainActivity extends FragmentActivity implements GoogleApiClient.On
         Log.d(TAG, "onConnectionFailed:" + connectionResult);
     }
 }
+
+
