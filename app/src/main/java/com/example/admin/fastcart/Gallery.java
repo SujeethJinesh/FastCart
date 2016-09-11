@@ -16,86 +16,121 @@ import android.widget.ViewSwitcher;
 /**
  * Created by aayush on 9/10/16.
  */
-public class Gallery extends Fragment implements ViewSwitcher.ViewFactory {
 
-    Integer pics[] = { R.drawable.greyshirt, R.drawable.khakishorts, R.drawable.pants, R.drawable.shirt };
+    import android.app.Activity;
+    import android.content.Context;
+    import android.content.Intent;
+    import android.database.Cursor;
+    import android.graphics.Bitmap;
+    import android.graphics.BitmapFactory;
+    import android.net.Uri;
+    import android.os.Bundle;
+    import android.provider.MediaStore;
+    import android.view.LayoutInflater;
+    import android.view.View;
+    import android.view.ViewGroup;
+    import android.widget.Button;
+    import android.widget.ImageView;
 
-    ImageSwitcher iSwitcher;
 
-    View rootView;
+    /**
+     * Example of loading an image into an image view using the image picker.
+     *
+     * Created by Rex St. John (on behalf of AirPair.com) on 3/4/14.
+     */
+    public class Gallery extends Fragment implements ViewSwitcher.ViewFactory, Button.OnClickListener {
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Code for our image picker select action.
+        private static final int IMAGE_PICKER_SELECT = 999;
 
-        super.onCreateView(inflater, container, savedInstanceState);
+        // Reference to our image view we will use
+        private ImageView mSelectedImage;
 
-        rootView = inflater.inflate(R.layout.gallery, container, false);
-        iSwitcher = (ImageSwitcher) rootView.findViewById(R.id.ImageSwitcher01);
-        iSwitcher.setFactory(this);
-        iSwitcher.setInAnimation(AnimationUtils.loadAnimation(getActivity(),
-                android.R.anim.fade_in));
-        iSwitcher.setOutAnimation(AnimationUtils.loadAnimation(getActivity(),
-                android.R.anim.fade_out));
+        // Reference to picker button.
+        private Button mPickPhotoButton;
 
-        android.widget.Gallery gallery = (android.widget.Gallery) rootView.findViewById(R.id.Gallery01);
-        gallery.setAdapter(new ImageAdapter(getActivity()));
-        gallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-                                    long arg3) {
-                iSwitcher.setImageResource(pics[arg2]);
+        public Gallery(){
+            super();
+        }
+
+
+        public static Gallery newInstance(int sectionNumber) {
+            Gallery fragment = new Gallery();
+            Bundle args = new Bundle();
+            args.putInt(sectionNumber + "", sectionNumber);
+            fragment.setArguments(args);
+            return fragment;
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View view =  null;
+            view = inflater.inflate(R.layout.fragment_photo_picker, container, false);
+
+            // Set the image view
+            mSelectedImage = (ImageView)view.findViewById(R.id.imageViewFullSized);
+            mPickPhotoButton = (Button)view.findViewById(R.id.button);
+
+            // Set OnItemClickListener so we can be notified on button clicks
+            mPickPhotoButton.setOnClickListener(this);
+
+            return view;
+        }
+
+        @Override
+        public void onClick(View view) {
+            Intent i = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(i, IMAGE_PICKER_SELECT);
+        }
+
+
+        public void onActivityResult(int requestCode, int resultCode, Intent data) {
+            if (requestCode == IMAGE_PICKER_SELECT  && resultCode == Activity.RESULT_OK) {
+//                MainActivity activity = (MainActivity)getActivity();
+                Bitmap bitmap = getBitmapFromCameraData(data, getActivity());
+                mSelectedImage.setImageBitmap(bitmap);
             }
-        });
+        }
 
-        return rootView;
+        private void setFullImageFromFilePath(String imagePath) {
+            // Get the dimensions of the View
+            int targetW = mSelectedImage.getWidth();
+            int targetH = mSelectedImage.getHeight();
+
+            // Get the dimensions of the bitmap
+            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+            bmOptions.inJustDecodeBounds = true;
+            BitmapFactory.decodeFile(imagePath, bmOptions);
+            int photoW = bmOptions.outWidth;
+            int photoH = bmOptions.outHeight;
+
+            // Determine how much to scale down the image
+            int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
+
+            // Decode the image file into a Bitmap sized to fill the View
+            bmOptions.inJustDecodeBounds = false;
+            bmOptions.inSampleSize = scaleFactor;
+            bmOptions.inPurgeable = true;
+
+            Bitmap bitmap = BitmapFactory.decodeFile(imagePath, bmOptions);
+            mSelectedImage.setImageBitmap(bitmap);
+        }
+        public static Bitmap getBitmapFromCameraData(Intent data, Context context){
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+            Cursor cursor = context.getContentResolver().query(selectedImage,filePathColumn, null, null, null);
+            cursor.moveToFirst();
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+            return BitmapFactory.decodeFile(picturePath);
+        }
+
+        @Override
+        public View makeView() {
+            return null;
+        }
     }
-
-    public class ImageAdapter extends BaseAdapter {
-
-        private Context ctx;
-
-        public ImageAdapter(Context c) {
-            ctx = c;
-        }
-
-        @Override
-        public int getCount() {
-
-            return pics.length;
-        }
-
-        @Override
-        public Object getItem(int arg0) {
-
-            return arg0;
-        }
-
-        @Override
-        public long getItemId(int arg0) {
-
-            return arg0;
-        }
-
-        @Override
-        public View getView(int arg0, View arg1, ViewGroup arg2) {
-            ImageView iView = new ImageView(ctx);
-            iView.setImageResource(pics[arg0]);
-            iView.setScaleType(ImageView.ScaleType.FIT_XY);
-            iView.setLayoutParams(new android.widget.Gallery.LayoutParams(150, 150));
-            return iView;
-        }
-
-    }
-
-    @Override
-    public View makeView() {
-        ImageView iView = new ImageView(getActivity());
-        iView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        iView.setLayoutParams(new
-                ImageSwitcher.LayoutParams(
-                ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
-        iView.setBackgroundColor(0xFF000000);
-        return iView;
-    }
-}
 

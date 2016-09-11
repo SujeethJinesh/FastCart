@@ -47,6 +47,7 @@ public class OutfitSelector extends Fragment {
                     bool = !bool;
                 } else {
                     viewFlipperTop.stopFlipping();
+                    bool = !bool;
                 }
 
             }
@@ -63,6 +64,7 @@ public class OutfitSelector extends Fragment {
                     bool = !bool;
                 } else {
                     viewFlipperMiddle.stopFlipping();
+                    bool = !bool;
                 }
             }
         });
